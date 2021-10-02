@@ -64,6 +64,28 @@ const buttons = (global.buttons = require('discord-buttons'));
 buttons(client)
 
 client.on("clickButton", async button => {
+        if (button.id === "Giveaway") {
+        if (button.clicker.member.roles.cache.get(config.buttons.giveaway)) {
+            await button.clicker.member.roles.remove(config.buttons.giveaway);
+            await button.reply.think(true);
+            await button.reply.edit("Çekiliş katılımcısı rolü başarıyla üzerinizden alındı!");
+        } else {
+            await button.clicker.member.roles.add(config.buttons.giveaway);
+            await button.reply.think(true);
+            await button.reply.edit("Çekiliş katılımcısı rolünü başarıyla aldınız!");
+        }
+    };
+    if (button.id === "Activity") {
+        if (button.clicker.member.roles.cache.get(config.buttons.activity)) {
+            await button.clicker.member.roles.remove(config.buttons.giveaway);
+            await button.reply.think(true);
+            await button.reply.edit("Etkinlik katılımcısı rolü başarıyla üzerinizden alındı!");
+        } else {
+            await button.clicker.member.roles.add(config.buttons.activity);
+            await button.reply.think(true);
+            await button.reply.edit("Etkinlik katılımcısı rolünü başarıyla aldınız!");
+        }
+    };
     if (button.id === "one") {
         const names = db.get(`isimler_${button.clicker.id}`)
         await button.reply.think(true);
